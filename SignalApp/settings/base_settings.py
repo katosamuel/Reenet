@@ -57,6 +57,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+#AUTH_USER_MODEL = "user.User"
+
 ROOT_URLCONF = 'SignalApp.urls'
 
 CORS_ALLOW_ALL_ORIGINS = False
