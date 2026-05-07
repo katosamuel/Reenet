@@ -37,11 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    'apps.authentication',
+    'apps.posts',
 
     'rest_framework_simplejwt',
     'rest_framework',
     'corsheaders',
-    'apps.posts',
+
 ]
 
 MIDDLEWARE = [
@@ -57,7 +60,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-#AUTH_USER_MODEL = "user.User"
+AUTH_USER_MODEL = "authentication.User"
 
 ROOT_URLCONF = 'SignalApp.urls'
 
