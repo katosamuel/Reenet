@@ -23,4 +23,4 @@ class LoginView(APIView):
         serializer = LoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = login_user(serializer.data)
-        return Response({"message": "logged in successfully"}, get_token(user))
+        return Response(get_token(user), status=200)
