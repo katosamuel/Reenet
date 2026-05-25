@@ -1,6 +1,6 @@
 from django.db import models
-from authentication.models import User
-from posts.models import Signals
+from apps.authentication.models import User
+from apps.posts.models import Signals
 
 # Create your models here.
 
