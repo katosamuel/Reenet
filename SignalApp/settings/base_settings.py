@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'apps.authentication',
     'apps.posts',
     'apps.comments',
+    'apps.other_interactions',
 
     'rest_framework_simplejwt',
     'rest_framework',

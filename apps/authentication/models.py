@@ -36,7 +36,6 @@ class UserManager(BaseUserManager):
 
         return user
 
-
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
 
@@ -49,10 +48,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     REQUIRED_FIELDS = []
 
-# class User(AbstractUser):
-#     username = None
-#     email = models.EmailField(unique=True)
-#     USERNAME_FIELD = "email"
-#     REQUIRED_FIELDS = []
+class Profile(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    profile_picture = models.ImageField(upload_to=None, max_length=None)
+    time_stamp = models.DateTimeField(auto_now=False, auto_now_add=False)
 
 

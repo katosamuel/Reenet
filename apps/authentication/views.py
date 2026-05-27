@@ -24,3 +24,11 @@ class LoginView(APIView):
         serializer.is_valid(raise_exception=True)
         user = login_user(serializer.data)
         return Response(get_token(user), status=200)
+
+class Profile(APIView):
+    def get(self, request):
+        pass
+        # return Response()
+
+    def post(self):
+        pass
