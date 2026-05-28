@@ -1,8 +1,24 @@
 from .base_settings import *
+from pathlib import Path
+from dotenv import load_dotenv
+import dj_database_url
+import os
 
-DEBUG = False
+load_dotenv()
 
-#ALLOWED_HOSTS = ["*"]
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+DATABASES = {
+    "default": dj_database_url.parse(
+        os.getenv("DATABASE_URL")
+    )
+}
+
+DEBUG = True
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+ALLOWED_HOSTS = ["*"]
 
 CORS_ALLOWED_ORIGINS = []
 
