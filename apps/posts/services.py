@@ -21,11 +21,11 @@ def post_signal(request):
         return Response(serializers.data, status=201)
     return Response(serializers.errors, status=400)
 
-def delete_signal(request, signal_id):
+def delete_signal(signal_id):
     if not signal_id:
         return Response({"error":"Id required"})
     signal = Signals.objects.get(id=signal_id)
     if signal.DoesNotExist:
-        return Response({"message":"signal not found"}, status=404)
+        return Response({"message":"signal not found"})
     signal.delete()
-    return Response({"message":"signal deleted"}, status=200)
+    return Response({"message":"signal deleted"})
