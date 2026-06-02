@@ -7,6 +7,13 @@ def get_signals():
     serializers = SignalSerializer(signals, many=True)
     return Response(serializers.data)
 
+def get_single_signal(signal_id):
+    if not signal_id:
+        return Response({"error": "Id required"})
+    signal = Signal.objects.get(id=signal)
+    serializers = SignalSerializer(signal)
+    return Response(serializers.data)
+
 def post_signal(request):
     serializers = SignalSerializer(data=request.data)
     if serializers.is_valid():
@@ -14,7 +21,7 @@ def post_signal(request):
         return Response(serializers.data, status=201)
     return Response(serializers.errors, status=400)
 
-def delete_signal(request, signal_id = None):
+def delete_signal(request, signal_id):
     if not signal_id:
         return Response({"error":"Id required"})
     signal = Signals.objects.get(id=signal_id)
