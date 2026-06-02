@@ -12,8 +12,8 @@ class SignalView(APIView):
         return get_signals()
     
     def post(self, request):
-        return post_signal(request)
+        return post_signal()
     
-    def delete(self, request, signal_id):
+    def delete(self, signal_id):
         return delete_signal(signal_id, request)
         
