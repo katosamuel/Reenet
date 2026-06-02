@@ -10,7 +10,7 @@ def get_signals():
 def get_single_signal(signal_id):
     if not signal_id:
         return Response({"error": "Id required"})
-    signal = Signals.objects.get(id=signal)
+    signal = Signals.objects.get(id=signal_id)
     serializers = SignalSerializer(signal)
     return Response(serializers.data)
 
