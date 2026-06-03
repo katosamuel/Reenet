@@ -50,7 +50,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    profile_picture = models.ImageField(upload_to=None, max_length=None)
+    username = models.CharField(max_length=20, null=True)
+    bio = models.TextField(blank=True, null=True)
+    profile_picture = models.ImageField(upload_to=None, max_length=None, blank=True, null=True)
     time_stamp = models.DateTimeField(auto_now=False, auto_now_add=False)
 
 
