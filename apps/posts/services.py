@@ -14,7 +14,7 @@ def get_single_signal(signal_id):
         signal = Signals.objects.get(id=signal_id)
         serializers = SignalSerializer(signal)
         return Response(serializers.data)
-        except Signals.DoesNotExist:
+    except Signals.DoesNotExist:
         return Response({"message": "post not found"})
 
 def post_signal(request):
