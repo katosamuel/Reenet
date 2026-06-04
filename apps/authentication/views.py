@@ -12,7 +12,7 @@ def get_token(user):
 def user_data(token, user):
     data = {
             "id": user.id,
-            "email": user.email,
+            "profile_id": user.profile.id,
             "access": str(token.access_token),
             "refresh_token": str(token)
             }
