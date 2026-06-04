@@ -7,15 +7,25 @@ from .serializers import *
 # Create your views here.
 def get_token(user):
     token = RefreshToken.for_user(user)
-    return ({"access": str(token.access_token),
-            "refresh_token": str(token)})
+    return token
+
+def user_data(token, user):
+    data = {
+            "id": user.id,
+            "email": user.email,
+            "access": str(token.access_token),
+            "refresh_token": str(token)
+            }
+    return data
 
 class RegisterView(APIView):
     def post(self, request):
         serializer = RegisterSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = register_user(serializer.validated_data)
-        return Response(get_token(user), status=201)
+        token = get_token(user)
+        data = user_data(token=token, user=user)
+        return Response(data, status=201)
         # return Response(serializer.errors)
            
 class LoginView(APIView):
@@ -23,12 +33,20 @@ class LoginView(APIView):
         serializer = LoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = login_user(serializer.data)
-        return Response(get_token(user), status=200)
+        token = get_token(user)
+        data = user_data(user=user, token=token)
+        return Response(data, status=200)
 
-class Profile(APIView):
-    def get(self, request):
-        pass
-        # return Response()
+class ProfileView(APIView):
+    def get(self, request, profile_id):
+        profile = get_profile(profile_id)
+        serializer = ProfileSerializer(profile)
+        return Response(serializer.data, status=200)
 
-    def post(self):
-        pass
+    def put(self, request, profile_id):
+        profile = Profile.objects.get(id=profile_id)
+        serializer = ProfileSerializer(profile, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"message": "profile updated"}, status=201)
+        return Response(serializer.errors)

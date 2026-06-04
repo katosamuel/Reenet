@@ -8,7 +8,7 @@ from .services import *
 class CommentView(APIView):
     def get(self, request, post_id):
         comments = get_comments(request, post_id)
-        
+        serializer = None
         return Response(serializer.errors, status=400)
     
     def post(self):

@@ -16,3 +16,19 @@ def login_user(validated_data):
     user = authenticate(email=validated_data["email"],
                         password=validated_data["password"])
     return user
+
+def get_profile(profile_id=None):
+    if not profile_id:
+        return {"error": "id required"}
+    
+    profile = Profile.objects.get(id=profile_id)
+    try:
+        return profile
+    except profile.DoesNotExist:
+        return {"message": "profile not found"}
+    
+# def post_profile(validated_data):
+#     profile = Profile.objects.create(
+
+#     )
+#     return profile
