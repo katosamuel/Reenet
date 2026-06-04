@@ -37,12 +37,14 @@ class LoginView(APIView):
         data = user_data(user=user, token=token)
         return Response(data, status=200)
 
+
 class MyProfileView(APIView):
     def get(self, request):
         profile = request.user.profile
         serializer = ProfileSerializer(profile)
         return Response(serializer.data, status=200)
     
+
 class ProfileView(APIView):
     def get(self, request, profile_id):
         profile = get_profile(profile_id)

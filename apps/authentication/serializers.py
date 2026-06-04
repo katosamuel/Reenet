@@ -20,7 +20,6 @@ class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField(min_length=8)
 
-
 class ProfileSerializer(serializers.ModelSerializer):
     #profile = serializers.ImageField()
     email = serializers.EmailField(source="user.email", read_only=True)
