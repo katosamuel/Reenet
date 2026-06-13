@@ -58,3 +58,9 @@ class ProfileView(APIView):
             serializer.save()
             return Response({"message": "profile updated"}, status=201)
         return Response(serializer.errors, status=400)
+        
+class RefreshTokenView(APIView):
+    def get(self):
+        refresh = request.data.get("refresh")
+        token = RefreshToken(refresh)
+        return Response({"access": str(token.access)}, status=200)
