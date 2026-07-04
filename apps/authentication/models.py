@@ -50,7 +50,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, related_name="profile", on_delete=models.CASCADE)
-    username = models.CharField(max_length=20, null=True)
+    username = models.CharField(max_length=150, null=True)
     bio = models.TextField(max_length=300, blank=True, null=True)
     avatar = models.ImageField(upload_to=None, max_length=None, blank=True, null=True)
     time_stamp = models.DateTimeField(auto_now_add=True)
