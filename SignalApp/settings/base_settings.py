@@ -68,6 +68,9 @@ AUTH_USER_MODEL = "authentication.User"
 ROOT_URLCONF = 'SignalApp.urls'
 
 CORS_ALLOW_ALL_ORIGINS = False
+CSRF_TRUSTED_ORIGINS = [
+    "https://reenet.onrender.com",
+]
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
