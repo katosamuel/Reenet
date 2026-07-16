@@ -48,6 +48,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     REQUIRED_FIELDS = []
 
+    def __str__(self):
+        return self.email
+
 class Profile(models.Model):
     user = models.OneToOneField(User, related_name="profile", on_delete=models.CASCADE)
     username = models.CharField(max_length=150, null=True)

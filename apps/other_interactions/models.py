@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-from apps.posts.models import Signals
-
+from apps.posts.models import Post
 # Create your models here.
 
 User = get_user_model()
@@ -17,7 +16,7 @@ class Follow(models.Model):
 
 class SavePost(models.Model):
     user = models.ForeignKey(User, related_name="saved_posts", on_delete=models.CASCADE)
-    post = models.ForeignKey(Signals, related_name='saved_posts', on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, related_name='saved_posts', on_delete=models.CASCADE)
     time_stamp = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -26,7 +25,7 @@ class SavePost(models.Model):
 
 class LikePost(models.Model):
     user = models.ForeignKey(User, related_name="liked_posts", on_delete=models.CASCADE)
-    post = models.ForeignKey(Signals, related_name='liked_posts', on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, related_name='liked_posts', on_delete=models.CASCADE)
     time_stamp = models.DateTimeField(auto_now_add=True)
 
     class Meta:

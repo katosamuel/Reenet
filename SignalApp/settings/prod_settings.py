@@ -1,8 +1,4 @@
 from .base_settings import *
-from pathlib import Path
-from dotenv import load_dotenv
-import dj_database_url
-import os
 
 load_dotenv()
 
@@ -21,4 +17,5 @@ CORS_ALLOW_ALL_ORIGINS = True
 ALLOWED_HOSTS = ["*"]
 
 # CORS_ALLOWED_ORIGINS = []
+
 

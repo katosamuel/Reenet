@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Signals
+from apps.posts.models import Post
 
 # Register your models here.
 
-admin.site.register(Signals)
+admin.site.register(Post)
