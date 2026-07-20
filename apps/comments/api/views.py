@@ -3,28 +3,37 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from apps.comments.serializers import (CommentSerializer, CreateCommentSerializer)
 from apps.comments.queries import CommentQueries
-from apps.comments.services import (CreateComment)                                                                                                                                                                                                                                                                                           
+from apps.comments.services import (CreateComment, DeleteComment)                                                                                                                                                                                                                                                                                           
 
 # Create your views here.
 
 class CommentView(APIView):
-    def get(self, request, post_id):
-        # comments = get_comments(request, post_id)
-        # serializer = CommentSerializer(comments, many=True)
-        # return Response(serializer.data, status=200)
-        pass
+
+    @staticmethod
+    def ids(data) -> tuple:
+        post_id = data.get("post_id")
+        comment_id = data.get("comment_id")
+        return post_id, comment_id
     
-    # def post(self, request,  post_id):
-    #     user = request.user 
-    #     serializer = CommentSerializer(data=request.data)
-    #     if serializer.is_valid():
-    #         post_comment(user=user, post_id=post_id, validated_data=serializer.validated_data)
-    #         return Response(serializer.data, status=200)
-    #     return Response(serializers.errors, status=400)
+    def get(self, request, **kwargs) -> Response:
+        post_id, comment_id = self.ids(kwargs)
+        comment = CommentQueries.get_comment(post_id=post_id, comment_id=comment_id)
+        serializer = CommentSerializer(comment)
+        return Response(serializer.data, status=200)
         
     
-    # def delete(self, request):
-    #     return Response()
+    def patch(self, request, **kwargs) -> Response:
+        post_id, comment_id = self.ids(kwargs)
+        serializer = CommentSerializer(data=request.data)
+        return Response(serializer.errors, status=400)
+        
+    
+    def delete(self, request, **kwargs) -> Response:
+        post_id, comment_id = self.ids(kwargs)
+        delete_comment = DeleteComment.execute(post_id=post_id, comment_id=comment_id)
+        if delete_comment == True:
+            return Response({"message": "comment deleted"}, status=200)
+        return Response({"error": "comment deletion error"}, status=400)
     
 class CommentListView(APIView):
     def get(self, request, **kwargs) -> Response:
